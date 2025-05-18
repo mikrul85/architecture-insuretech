@@ -1,0 +1,41 @@
+mihail@MacBook-Pro-Mihail Task 2 % kubectl describe deployment scaletestapp-deployment
+Name:                   scaletestapp-deployment
+Namespace:              default
+CreationTimestamp:      Sat, 17 May 2025 23:09:43 +0300
+Labels:                 app=scaletestapp
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=scaletestapp
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=scaletestapp
+  Containers:
+   scaletestapp:
+    Image:      shestera/scaletestapp:latest
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Limits:
+      memory:  30Mi
+    Requests:
+      memory:      20Mi
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   scaletestapp-deployment-869969586c (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  17m   deployment-controller  Scaled up replica set scaletestapp-deployment-869969586c from 0 to 1
+mihail@MacBook-Pro-Mihail Task 2 % kubectl get replicasets -l app=scaletestapp
+NAME                                 DESIRED   CURRENT   READY   AGE
+scaletestapp-deployment-869969586c   1         1         1       17m
